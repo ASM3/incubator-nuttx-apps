@@ -27,6 +27,7 @@
 #include <sys/ioctl.h>
 
 #include <sensor/accel.h>
+#include <sensor/adc.h>
 #include <sensor/baro.h>
 #include <sensor/cap.h>
 #include <sensor/co2.h>
@@ -68,6 +69,8 @@ static FAR const struct orb_metadata *g_sensor_list[] =
 {
   ORB_ID(sensor_accel),
   ORB_ID(sensor_accel_uncal),
+  ORB_ID(sensor_adc),
+  ORB_ID(sensor_adc_uncal),
   ORB_ID(sensor_baro),
   ORB_ID(sensor_cap),
   ORB_ID(sensor_co2),

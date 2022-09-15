@@ -199,6 +199,31 @@ int myapp_main(int argc, FAR char *argv[])
 
   UNUSED(ret);
 
+  /* advertise attitude topic */
+  struct orb_adc_s adc;
+  //int pubsub_task;
+  int instance = 0;
+  int adc_pub_fd;
+
+  adc.adc0       = 0;
+  adc.adc1       = 0;
+  adc.adc2       = 0;
+  adc.timestamp  = orb_absolute_time();
+
+  adc_pub_fd = orb_advertise_multi_queue_persist(ORB_ID(sensor_adc),
+                                         &adc, &instance, 1);
+  if (adc_pub_fd < 0)
+    {
+      return printf("orb_advertise failed");
+    }
+////////////// Temp check subscribe message
+  int sfd;
+
+  if ((sfd = orb_subscribe(ORB_ID(sensor_adc))) < 0)
+    {
+      printf("subscribe failed\n");
+    }
+//////////////////
   /* Check if we have initialized */
 
   if (!g_adcstate.initialized)
@@ -292,8 +317,38 @@ int myapp_main(int argc, FAR char *argv[])
               //printf("Sample:\n");
               for (i = 0; i < nsamples; i++)
                 {
-                  printf("%d: channel: IN_%d ADC value: %" PRId32 "\n",
+#if 0
+            	  printf("%d: channel: IN_%d ADC value: %" PRId32 "\n",
                          i + 1, sample[i].am_channel, sample[i].am_data);
+#else if
+            	  memset(&adc, 0, sizeof(adc));
+
+            	  adc.adc0       = sample[i].am_data;
+            	  adc.adc1       = sample[i].am_data;
+            	  adc.adc2       = sample[i].am_data;
+            	  adc.timestamp = orb_absolute_time();
+
+                  if (OK != orb_publish(ORB_ID(sensor_adc), adc_pub_fd, &adc))
+                    {
+                	  printf("publish fail!\n");
+                      return 0;
+                    }
+                  //usleep(1000); /* simulate >800 Hz system operation */
+                  ///////////////////// temp check
+                  bool updated;
+            	  memset(&adc, 0, sizeof(adc));
+
+
+                  orb_check(sfd, &updated);
+                  if (updated)
+                    {
+                      orb_copy(ORB_ID(sensor_adc), sfd, &adc);
+                	  printf("published: %"PRIu64":  ADC value: %" PRId32 "\n",
+                			  adc.timestamp, adc.adc0);
+                    }
+                  /////////////////////
+
+#endif
                 }
             }
         }

@@ -26,6 +26,8 @@
  ****************************************************************************/
 
 #include <nuttx/config.h>
+#include <uORB/uORB.h>
+#include <sensor/adc.h>
 
 /****************************************************************************
  * Pre-processor Definitions
@@ -66,6 +68,14 @@ struct adc_state_s
   bool      initialized;
   FAR char *devpath;
   int       count;
+};
+
+struct orb_adc_s
+{
+  uint64_t timestamp;
+  int32_t adc0;
+  int32_t adc1;
+  int32_t adc2;
 };
 
 /****************************************************************************
