@@ -40,7 +40,7 @@ config EXAMPLES_ADC_NSAMPLES
 		This number of samples is collected and the program terminates.
 		Default:  0 (samples are collected indefinitely).
 
-config EXAMPLES_ADC_GROUPSIZE
+config CONFIG_EXAMPLES_ADC_GROUPSIZE
 	int "Number of Samples per Group"
 	default 4
 	---help---

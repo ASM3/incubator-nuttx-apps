@@ -55,12 +55,12 @@
 #  define CONFIG_EXAMPLES_ADC_DEVPATH "/dev/adc0"
 #endif
 
-//#ifndef CONFIG_EXAMPLES_ADC_GROUPSIZE
+#ifndef CONFIG_EXAMPLES_ADC_GROUPSIZE
 #  define CONFIG_EXAMPLES_ADC_GROUPSIZE 2
-//#endif
+#endif
 
 #ifndef STM32L4_ADC1_SAMPLE_FREQUENCY
-#  define STM32L4_ADC1_SAMPLE_FREQUENCY 1000
+#  define STM32L4_ADC1_SAMPLE_FREQUENCY 100
 #endif
 
 /****************************************************************************

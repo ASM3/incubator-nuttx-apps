@@ -323,9 +323,9 @@ int myapp_main(int argc, FAR char *argv[])
 #else if
             	  memset(&adc, 0, sizeof(adc));
 
-            	  adc.adc0       = sample[i].am_data;
-            	  adc.adc1       = sample[i].am_data;
-            	  adc.adc2       = sample[i].am_data;
+            	  adc.adc0       = sample[0].am_data;
+            	  adc.adc1       = sample[1].am_data;
+            	  adc.adc2       = sample[2].am_data;
             	  adc.timestamp = orb_absolute_time();
 
                   if (OK != orb_publish(ORB_ID(sensor_adc), adc_pub_fd, &adc))
@@ -334,7 +334,7 @@ int myapp_main(int argc, FAR char *argv[])
                       return 0;
                     }
                   //usleep(1000); /* simulate >800 Hz system operation */
-                  ///////////////////// temp check
+                  ///////////////////// Temp remove from here to another app! //////////////
                   bool updated;
             	  memset(&adc, 0, sizeof(adc));
 
@@ -346,7 +346,7 @@ int myapp_main(int argc, FAR char *argv[])
                 	  printf("published: %"PRIu64":  ADC value: %" PRId32 "\n",
                 			  adc.timestamp, adc.adc0);
                     }
-                  /////////////////////
+                  ///////////////////// ------------------------------------ //////////////
 
 #endif
                 }
