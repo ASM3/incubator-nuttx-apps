@@ -59,6 +59,10 @@
 #  define CONFIG_EXAMPLES_ADC_GROUPSIZE 2
 //#endif
 
+#ifndef STM32L4_ADC1_SAMPLE_FREQUENCY
+#  define STM32L4_ADC1_SAMPLE_FREQUENCY 1000
+#endif
+
 /****************************************************************************
  * Public Types
  ****************************************************************************/

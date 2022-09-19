@@ -57,4 +57,11 @@ config EXAMPLES_ADC_SWTRIG
 		issue the software trigger ioctl before attempting to read from the
 		ADC.
 
+config STM32L4_ADC1_SAMPLE_FREQUENCY
+	int "ADC1 Sampling Frequency"
+	default 100
+	depends on STM32L4_HAVE_ADC1_TIMER
+	---help---
+		ADC1 sampling frequency.  Default:  100Hz
+		
 endif
