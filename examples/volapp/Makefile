@@ -1,5 +1,5 @@
 ############################################################################
-# apps/examples/myapp/Make.defs
+# apps/examples/volapp/Make.defs
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -22,13 +22,13 @@ include $(APPDIR)/Make.defs
 
 # Hello, World! built-in application info
 
-PROGNAME  = $(CONFIG_EXAMPLES_MYAPP_PROGNAME)
-PRIORITY  = $(CONFIG_EXAMPLES_MYAPP_PRIORITY)
-STACKSIZE = $(CONFIG_EXAMPLES_MYAPP_STACKSIZE)
-MODULE    = $(CONFIG_EXAMPLES_MYAPP)
+PROGNAME  = $(CONFIG_EXAMPLES_VOLAPP_PROGNAME)
+PRIORITY  = $(CONFIG_EXAMPLES_VOLAPP_PRIORITY)
+STACKSIZE = $(CONFIG_EXAMPLES_VOLAPP_STACKSIZE)
+MODULE    = $(CONFIG_EXAMPLES_VOLAPP)
 
 # Hello, World! Example
 
-MAINSRC = myapp_main.c
+MAINSRC = volapp_main.c
 
 include $(APPDIR)/Application.mk

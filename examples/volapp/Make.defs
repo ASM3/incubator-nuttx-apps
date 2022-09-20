@@ -1,5 +1,5 @@
 ############################################################################
-# apps/examples/myapp/Make.defs
+# apps/examples/volapp/Make.defs
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -18,7 +18,7 @@
 #
 ############################################################################
 
-ifneq ($(CONFIG_EXAMPLES_MYAPP),)
-CONFIGURED_APPS += $(APPDIR)/examples/myapp
+ifneq ($(CONFIG_EXAMPLES_VOLAPP),)
+CONFIGURED_APPS += $(APPDIR)/examples/volapp
 endif
 

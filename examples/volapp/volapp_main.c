@@ -1,5 +1,5 @@
 /****************************************************************************
- * apps/examples/myapp/myapp_main.c
+ * apps/examples/volapp/volapp_main.c
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -43,7 +43,7 @@
 #include <errno.h>
 #include <debug.h>
 
-#include "myapp.h"
+#include "../volapp/volapp.h"
 
 /****************************************************************************
  * Private Data
@@ -85,7 +85,7 @@ static void adc_help(FAR struct adc_state_s *adc)
   printf("\n\"sticky\" OPTIONS include:\n");
   printf("  [-p devpath] selects the ADC device.  "
          "Default: %s Current: %s\n",
-         CONFIG_EXAMPLES_ADC_DEVPATH,
+         CONFIG_ADC_DEVPATH,
          g_adcstate.devpath ? g_adcstate.devpath : "NONE");
   printf("  [-n count] selects the samples to collect.  "
          "Default: 1 Current: %d\n", adc->count);
@@ -182,14 +182,14 @@ static void parse_args(FAR struct adc_state_s *adc, int argc,
 }
 
 /****************************************************************************
- * myapp_main
+ * volapp_main
  ****************************************************************************/
 
-int myapp_main(int argc, FAR char *argv[])
+int volapp_main(int argc, FAR char *argv[])
 {
   printf("Voliro PB V2 app!!\n");
 
-  struct adc_msg_s sample[CONFIG_EXAMPLES_ADC_GROUPSIZE];
+  struct adc_msg_s sample[CONFIG_ADC_GROUPSIZE];
   size_t readsize;
   ssize_t nbytes;
   int fd;
@@ -234,12 +234,12 @@ int myapp_main(int argc, FAR char *argv[])
 
       /* Set the default values */
 
-      adc_devpath(&g_adcstate, CONFIG_EXAMPLES_ADC_DEVPATH);
+      adc_devpath(&g_adcstate, CONFIG_ADC_DEVPATH);
 
       g_adcstate.initialized = true;
     }
 
-  g_adcstate.count = CONFIG_EXAMPLES_ADC_NSAMPLES;
+  g_adcstate.count = CONFIG_ADC_NSAMPLES;
 
   /* Parse the command line */
 
@@ -276,9 +276,9 @@ int myapp_main(int argc, FAR char *argv[])
 
       fflush(stdout);
 
-      /* Read up to CONFIG_EXAMPLES_ADC_GROUPSIZE samples */
+      /* Read up to CONFIG_ADC_GROUPSIZE samples */
 
-      readsize = CONFIG_EXAMPLES_ADC_GROUPSIZE * sizeof(struct adc_msg_s);
+      readsize = CONFIG_ADC_GROUPSIZE * sizeof(struct adc_msg_s);
       nbytes = read(fd, sample, readsize);
 
       /* Handle unexpected return values */
